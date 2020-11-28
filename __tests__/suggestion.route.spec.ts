@@ -19,4 +19,14 @@ describe('suggestion route', () => {
     expect(response.body).toHaveProperty('temperature');
     expect(response.body).toHaveProperty('playlist');
   });
+
+  test('GET /suggestion should return 400 if city does not exist', async () => {
+    const city = 'undefined';
+
+    const response = await request(app).get('/suggestion').query({
+      cityName: city,
+    });
+
+    expect(response.status).toBe(400);
+  });
 });
