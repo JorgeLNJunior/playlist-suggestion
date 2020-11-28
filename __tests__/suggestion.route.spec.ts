@@ -29,4 +29,10 @@ describe('suggestion route', () => {
 
     expect(response.status).toBe(400);
   });
+
+  test('GET /notfound should return 404 if route does not exist', async () => {
+    const response = await request(app).get('/notfound');
+
+    expect(response.status).toBe(404);
+  });
 });
