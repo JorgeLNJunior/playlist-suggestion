@@ -29,19 +29,10 @@ export class PlaylistItem {
 
 export class Track {
   @Allow()
-  id: string;
-
-  @Allow()
-  artist: Array<unknown>;
-
-  @Allow()
   name: string;
 
   @Allow()
   external_urls: {
     spotify: string;
   };
-
-  @Allow()
-  href: string;
 }
