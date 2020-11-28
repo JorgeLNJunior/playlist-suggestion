@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { Request, Response } from 'express';
 
 import { SuggestionService } from '../services/suggestion.service';
@@ -11,9 +10,16 @@ export class SuggestionController {
       const result = await new SuggestionService().getTemperatureByCityName(
         String(cityName),
       );
-      return res.json({ city: cityName, temperature: result });
+      const playlist = await new SuggestionService().getPlaylistByTemperature(
+        result,
+      );
+      return res.json({
+        city: cityName,
+        temperature: result,
+        playlist: playlist,
+      });
     } catch (error) {
-      return res.status(400).json({ error: error });
+      return res.status(400).json({ error: error.response.data });
     }
   }
 }
