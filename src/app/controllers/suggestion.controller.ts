@@ -21,7 +21,9 @@ export class SuggestionController {
         tracks: tracks,
       });
     } catch (error) {
-      return res.status(400).json({ error: error.response.data });
+      if (error.response)
+        return res.status(400).json({ error: error.response.data });
+      return res.status(500).json({ error: error });
     }
   }
 }

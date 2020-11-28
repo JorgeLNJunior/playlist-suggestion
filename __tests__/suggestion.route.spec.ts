@@ -1,3 +1,4 @@
+import cities from 'all-the-cities';
 import request from 'supertest';
 
 import SpotifyAPI from '../src/api/spotify.api';
@@ -7,8 +8,10 @@ describe('suggestion route', () => {
   beforeAll(async () => await new SpotifyAPI().authenticate());
 
   test('GET /suggestion should return properties "city", "temperature" and "playlist"', async () => {
+    const city = cities[Math.floor(Math.random() * cities.length)].name;
+
     const response = await request(app).get('/suggestion').query({
-      cityName: 'new york',
+      cityName: city,
     });
 
     expect(response.status).toBe(200);
