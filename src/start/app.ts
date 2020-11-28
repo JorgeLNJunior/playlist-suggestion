@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import 'reflect-metadata';
+import '../jobs/spotifyRefresh';
 
 import cors from 'cors';
 import express, { Request, Response } from 'express';
