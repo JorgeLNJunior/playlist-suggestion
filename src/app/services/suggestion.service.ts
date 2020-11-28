@@ -51,7 +51,7 @@ export class SuggestionService {
     return result;
   }
 
-  async getPlaylistTracks(playlist: PlaylistItem) {
+  async getPlaylistTracks(playlist: PlaylistItem): Promise<Track[]> {
     const api = playlist.tracks.href;
 
     const response = await axios.get(api, {
@@ -63,7 +63,7 @@ export class SuggestionService {
       },
     });
 
-    const tracks = [];
+    const tracks: Track[] = [];
 
     for (const r of response.data.items) {
       const q = plainToClass(Track, r.track);
