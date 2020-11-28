@@ -13,6 +13,7 @@ export class SuggestionController {
       const playlist = await new SuggestionService().getPlaylistByTemperature(
         result,
       );
+      console.log(await new SuggestionService().getPlaylistTracks(playlist));
       return res.json({
         city: cityName,
         temperature: result,

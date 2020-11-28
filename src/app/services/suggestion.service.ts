@@ -2,7 +2,7 @@ import axios from 'axios';
 import { plainToClass } from 'class-transformer';
 import { validate } from 'class-validator';
 
-import { PlaylistGenre, PlaylistItem } from '../types/Playlist';
+import { PlaylistGenre, PlaylistItem } from '../types/Spotify';
 
 export class SuggestionService {
   async getTemperatureByCityName(cityName: string): Promise<number> {
@@ -49,5 +49,17 @@ export class SuggestionService {
     await validate(result, { whitelist: true });
 
     return result;
+  }
+
+  async getPlaylistTracks(playlist: PlaylistItem) {
+    const api = playlist.tracks.href;
+
+    const response = await axios.get(api, {
+      headers: {
+        Authorization: `Bearer ${process.env.SPOTIFY_ACCESS_TOKEN}`,
+      },
+    });
+
+    return response.data.items[0];
   }
 }
