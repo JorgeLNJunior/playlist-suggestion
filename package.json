@@ -50,6 +50,8 @@
   },
   "dependencies": {
     "axios": "^0.21.0",
+    "class-transformer": "^0.3.1",
+    "class-validator": "^0.12.2",
     "colorts": "^0.1.63",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -58,6 +60,7 @@
     "express-rate-limit": "^5.2.3",
     "express-winston": "^4.0.5",
     "helmet": "^4.2.0",
+    "reflect-metadata": "^0.1.13",
     "winston": "^3.3.3"
   }
 }
