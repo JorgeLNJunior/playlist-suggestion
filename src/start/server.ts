@@ -5,7 +5,7 @@ import app from './app';
 
 const port = parseInt(process.env.PORT as string) || 3000;
 
-const server = app.listen(port, async () => {
+app.listen(port, async () => {
   console.log(`listening on port ${port}`.green);
 
   try {
@@ -19,7 +19,5 @@ const server = app.listen(port, async () => {
     } else {
       console.log(error);
     }
-    console.log('server closed...'.red);
-    server.close();
   }
 });
