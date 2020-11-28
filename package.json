@@ -1,0 +1,61 @@
+{
+  "name": "typescript-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/src/start/server.js",
+  "scripts": {
+    "build": "rimraf ./dist && tsc",
+    "start": "node .",
+    "start:dev": "ts-node-dev --respawn --transpile-only --inspect -- ./src/start/server.ts",
+    "lint": "eslint --ext .js,.ts .",
+    "lint:fix": "eslint --fix --ext .js,.ts .",
+    "test": "jest --passWithNoTests --runInBand",
+    "test:coverage": "npm run test -- --coverage --silent",
+    "test:ci": "npm run test:coverage && coveralls < __tests__/coverage/lcov.info"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JorgeLNJunior/typescript-project.git"
+  },
+  "author": "JorgeLNJunior",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JorgeLNJunior/typescript-project/issues"
+  },
+  "homepage": "https://github.com/JorgeLNJunior/typescript-project#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@types/cors": "^2.8.8",
+    "@types/express": "^4.17.9",
+    "@types/express-rate-limit": "^5.1.0",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^14.14.9",
+    "@types/supertest": "^2.0.10",
+    "@typescript-eslint/eslint-plugin": "^4.8.1",
+    "@typescript-eslint/parser": "^4.8.1",
+    "coveralls": "^3.1.0",
+    "eslint": "^7.14.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-simple-import-sort": "^6.0.1",
+    "husky": "^4.3.0",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.0",
+    "rimraf": "^3.0.2",
+    "supertest": "^6.0.1",
+    "ts-jest": "^26.4.4",
+    "ts-node-dev": "^1.0.0",
+    "typescript": "^4.1.2"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "eslint-plugin-jest": "^24.1.3",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.2.3",
+    "express-winston": "^4.0.5",
+    "helmet": "^4.2.0",
+    "winston": "^3.3.3"
+  }
+}
