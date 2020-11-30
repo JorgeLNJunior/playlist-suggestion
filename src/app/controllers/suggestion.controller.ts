@@ -4,22 +4,17 @@ import { SuggestionService } from '../services/suggestion.service';
 
 export class SuggestionController {
   async suggest(req: Request, res: Response): Promise<Response> {
-    const { cityName } = req.query;
+    const { cityName, lat, long } = req.query;
+
+    const suggestionService = new SuggestionService({
+      cityName: cityName,
+      lat: lat,
+      long: long,
+    });
 
     try {
-      const result = await new SuggestionService().getTemperatureByCityName(
-        String(cityName),
-      );
-      const playlist = await new SuggestionService().getPlaylistByTemperature(
-        result,
-      );
-      const tracks = await new SuggestionService().getPlaylistTracks(playlist);
-      return res.json({
-        city: cityName,
-        temperature: result,
-        playlist: playlist,
-        tracks: tracks,
-      });
+      const playlist = suggestionService.getPlaylist();
+      return res.json(playlist);
     } catch (error) {
       if (error.response) {
         return res.status(400).json({ error: error.response.data });

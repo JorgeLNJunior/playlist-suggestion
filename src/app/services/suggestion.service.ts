@@ -1,30 +1,38 @@
-import axios from 'axios';
-import { plainToClass } from 'class-transformer';
-import { validate } from 'class-validator';
+import SpotifyAPI from 'src/api/spotify.api';
+import { WeatherAPI } from 'src/api/weather.api';
 
 import { PlaylistGenre, PlaylistItem, Track } from '../types/Spotify';
 
+type SuggestionServiceParams = {
+  cityName?: any;
+  lat?: any;
+  long?: any;
+};
+
+type PlaylistResult = {
+  playlist: PlaylistItem;
+  tracks: Track[];
+};
+
 export class SuggestionService {
-  async getTemperatureByCityName(cityName: string): Promise<number> {
-    const api = `http://api.openweathermap.org/data/2.5/weather`;
-
-    const result = await axios.get(api, {
-      params: {
-        q: cityName,
-        appid: process.env.OPEN_WEATHER_KEY,
-        units: 'metric',
-      },
-    });
-
-    const integerTemperature = Number(
-      String(result.data.main.temp).split('.')[0], // removing everything after the dot
-    );
-
-    return integerTemperature;
+  constructor(params: SuggestionServiceParams) {
+    this.cityName = params.cityName;
+    this.lat = params.lat;
+    this.long = params.long;
   }
 
-  async getPlaylistByTemperature(temperature: number): Promise<PlaylistItem> {
-    const option: PlaylistGenre =
+  private readonly cityName: string;
+  private readonly lat: string;
+  private readonly long: string;
+  private readonly weatherApi: WeatherAPI = new WeatherAPI();
+  private readonly spotifyApi: SpotifyAPI = new SpotifyAPI();
+
+  async getPlaylist(): Promise<PlaylistResult> {
+    const temperature = await this.weatherApi.getTeperatureByCityName(
+      this.cityName,
+    );
+
+    const genre: PlaylistGenre =
       temperature >= 30
         ? 'party'
         : temperature >= 15 && temperature < 30
@@ -33,44 +41,14 @@ export class SuggestionService {
         ? 'rock'
         : 'classical';
 
-    const api = `https://api.spotify.com/v1/search`;
-    const response = await axios.get(api, {
-      headers: {
-        Authorization: `Bearer ${process.env.SPOTIFY_ACCESS_TOKEN}`,
-      },
-      params: {
-        q: option,
-        type: 'playlist',
-        limit: 1,
-      },
-    });
+    const playlist = await this.spotifyApi.searchPlaylist(genre);
+    const tracks = await this.spotifyApi.getPlaylistTracks(playlist);
 
-    const result = plainToClass(PlaylistItem, response.data.playlists.items[0]);
-    await validate(result, { whitelist: true });
+    const result: PlaylistResult = {
+      playlist: playlist,
+      tracks: tracks,
+    };
 
     return result;
-  }
-
-  async getPlaylistTracks(playlist: PlaylistItem): Promise<Track[]> {
-    const api = playlist.tracks.href;
-
-    const response = await axios.get(api, {
-      params: {
-        limit: 20,
-      },
-      headers: {
-        Authorization: `Bearer ${process.env.SPOTIFY_ACCESS_TOKEN}`,
-      },
-    });
-
-    const tracks: Track[] = [];
-
-    for (const r of response.data.items) {
-      const q = plainToClass(Track, r.track);
-      await validate(q, { whitelist: true });
-      tracks.push(q);
-    }
-
-    return tracks;
   }
 }
