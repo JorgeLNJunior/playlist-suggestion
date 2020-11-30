@@ -1,18 +1,11 @@
 import SpotifyAPI from 'src/api/spotify.api';
 import { WeatherAPI } from 'src/api/weather.api';
 
-import { PlaylistGenre, PlaylistItem, Track } from '../types/Spotify';
-
-type SuggestionServiceParams = {
-  cityName?: any;
-  lat?: any;
-  long?: any;
-};
-
-type PlaylistResult = {
-  playlist: PlaylistItem;
-  tracks: Track[];
-};
+import { PlaylistGenre } from '../types/Spotify';
+import {
+  PlaylistResult,
+  SuggestionServiceParams,
+} from '../types/SuggestionService';
 
 export class SuggestionService {
   constructor(params: SuggestionServiceParams) {
