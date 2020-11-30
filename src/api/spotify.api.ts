@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import 'colorts/lib/string';
 
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import { plainToClass } from 'class-transformer';
 import { validate } from 'class-validator';
 import { PlaylistGenre, PlaylistItem, Track } from 'src/app/types/Spotify';
@@ -48,7 +48,7 @@ export default class SpotifyAPI {
     return response.data.playlists.items[0];
   }
 
-  async getPlaylistTracks(playlist: PlaylistItem) {
+  async getPlaylistTracks(playlist: PlaylistItem): Promise<Track[]> {
     const api = playlist.tracks.href;
 
     const response = await axios.get(api, {
