@@ -1,6 +1,5 @@
-import SpotifyAPI from 'src/api/spotify.api';
-import { WeatherAPI } from 'src/api/weather.api';
-
+import SpotifyAPI from '../../api/spotify.api';
+import { WeatherAPI } from '../../api/weather.api';
 import { PlaylistGenre } from '../types/Spotify';
 import {
   PlaylistResult,

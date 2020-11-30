@@ -4,7 +4,8 @@ import 'colorts/lib/string';
 import axios from 'axios';
 import { plainToClass } from 'class-transformer';
 import { validate } from 'class-validator';
-import { PlaylistGenre, PlaylistItem, Track } from 'src/app/types/Spotify';
+
+import { PlaylistGenre, PlaylistItem, Track } from '../app/types/Spotify';
 
 export default class SpotifyAPI {
   async authenticate(): Promise<void> {
