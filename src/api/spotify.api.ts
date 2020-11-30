@@ -46,7 +46,10 @@ export default class SpotifyAPI {
       },
     });
 
-    return response.data.playlists.items[0];
+    const result = plainToClass(PlaylistItem, response.data.playlists.items[0]);
+    await validate(result, { whitelist: true });
+
+    return result;
   }
 
   async getPlaylistTracks(playlist: PlaylistItem): Promise<Track[]> {

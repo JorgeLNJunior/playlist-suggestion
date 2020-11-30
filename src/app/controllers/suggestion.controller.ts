@@ -13,7 +13,7 @@ export class SuggestionController {
     });
 
     try {
-      const playlist = suggestionService.getPlaylist();
+      const playlist = await suggestionService.getPlaylist();
       return res.json(playlist);
     } catch (error) {
       if (error.response) {
