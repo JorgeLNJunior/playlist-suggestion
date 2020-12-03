@@ -3,7 +3,7 @@ import { PlaylistItem, Track } from './Spotify';
 export type SuggestionServiceParams = {
   cityName?: any;
   lat?: any;
-  long?: any;
+  lon?: any;
 };
 
 export type PlaylistResult = {

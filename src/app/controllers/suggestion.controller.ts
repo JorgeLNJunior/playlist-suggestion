@@ -4,12 +4,12 @@ import { SuggestionService } from '../services/suggestion.service';
 
 export class SuggestionController {
   async suggest(req: Request, res: Response): Promise<Response> {
-    const { cityName, lat, long } = req.query;
+    const { cityName, lat, lon } = req.query;
 
     const suggestionService = new SuggestionService({
       cityName: cityName,
       lat: lat,
-      long: long,
+      lon: lon,
     });
 
     try {
