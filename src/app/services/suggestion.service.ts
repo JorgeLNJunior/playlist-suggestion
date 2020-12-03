@@ -33,8 +33,6 @@ export class SuggestionService {
       );
     }
 
-    console.log(temperature);
-
     const genre: PlaylistGenre =
       temperature >= 30
         ? 'party'
