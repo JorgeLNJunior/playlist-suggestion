@@ -39,9 +39,9 @@ Aplicação [**backend challenge »**](https://github.com/ifood/vemproifood-back
 ## Rotas
 
 Informações básicas sobre as rotas da aplicação.
-| HTTP   | Rota                             | Descrição                    | Autenticação |
-|--------|----------------------------------|------------------------------|--------------|
-| GET    | /suggestion?                     | sugere uma playlist          | não          |
+| HTTP   | Rota           | Descrição                    | Parâmetros             |
+|--------|----------------|------------------------------|------------------------|
+| GET    | /suggestion?   | sugere uma playlist          | cityName ou lat e lon  |
 
 ## Tecnologias
 Este projeto foi construído com as seguintes tecnologias:
