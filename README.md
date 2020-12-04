@@ -33,7 +33,7 @@ Aplicação que sugere playlist de acordo com a temperatura atual.
 * [Licença](https://github.com/JorgeLNJunior/playlist-suggestion#licen%C3%A7a)
 
 ## Sobre o Projeto
-Aplicação [**backend challenge »**](https://github.com/ifood/vemproifood-backend) do ifood que sugere uma playlist com base na temperatura atual de uma cidade.
+Aplicação do [**backend challenge »**](https://github.com/ifood/vemproifood-backend) do ifood que sugere uma playlist com base na temperatura atual de uma cidade.
 
 
 ## Rotas
