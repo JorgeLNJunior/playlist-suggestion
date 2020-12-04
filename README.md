@@ -19,7 +19,7 @@ Aplicação que sugere playlist de acordo com a temperatura atual.
 
 <div align="center">
 
-[**API »**](https://github.com/JorgeLNJunior/playlist-suggestion)
+[**API »**](https://playlist-suggestion.herokuapp.com/)
 
 </div>
 
