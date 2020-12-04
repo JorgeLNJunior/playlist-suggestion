@@ -8,7 +8,7 @@ import app from '../src/start/app';
 describe('suggestion route', () => {
   beforeAll(async () => await new SpotifyAPI().authenticate());
 
-  test('GET /suggestion receive city name, should return properties "tracks" and "playlist"', async () => {
+  test('GET /suggestion receive city name, should return propertie "playlist"', async () => {
     const city = cities[Math.floor(Math.random() * cities.length)].name;
 
     const response = await request(app).get('/suggestion').query({
@@ -16,11 +16,10 @@ describe('suggestion route', () => {
     });
 
     expect(response.status).toBe(200);
-    expect(response.body).toHaveProperty('tracks');
     expect(response.body).toHaveProperty('playlist');
   });
 
-  test('GET /suggestion receive coordinates, should return properties "tracks" and "playlist"', async () => {
+  test('GET /suggestion receive coordinates, should return propertie "playlist"', async () => {
     const coordinates: Array<string> = ramdomCoordinate()
       .replace(' ', '')
       .split(',');
@@ -35,7 +34,6 @@ describe('suggestion route', () => {
     });
 
     expect(response.status).toBe(200);
-    expect(response.body).toHaveProperty('tracks');
     expect(response.body).toHaveProperty('playlist');
   });
 
