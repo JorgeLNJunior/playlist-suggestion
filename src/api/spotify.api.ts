@@ -2,10 +2,13 @@ import 'dotenv/config';
 import 'colorts/lib/string';
 
 import axios from 'axios';
-import { plainToClass } from 'class-transformer';
-import { validate } from 'class-validator';
 
-import { PlaylistGenre, PlaylistItem, Track } from '../app/types/Spotify';
+import {
+  Artist,
+  PlaylistGenre,
+  SpotifyPlaylistResponse,
+  Track,
+} from '../app/types/Spotify';
 
 export default class SpotifyAPI {
   async authenticate(): Promise<void> {
@@ -33,7 +36,8 @@ export default class SpotifyAPI {
     console.log('spotify authentication success'.green);
   }
 
-  async searchPlaylist(playlist: PlaylistGenre): Promise<PlaylistItem> {
+  // eslint-disable-next-line prettier/prettier
+  async searchPlaylist(playlist: PlaylistGenre): Promise<SpotifyPlaylistResponse> {
     const api = `https://api.spotify.com/v1/search`;
     const response = await axios.get(api, {
       headers: {
@@ -46,14 +50,26 @@ export default class SpotifyAPI {
       },
     });
 
-    const result = plainToClass(PlaylistItem, response.data.playlists.items[0]);
-    await validate(result, { whitelist: true });
+    const playlistItem = response.data.playlists.items[0];
+
+    const result = {
+      name: playlistItem.name,
+      description: playlistItem.description,
+      urls: {
+        api: playlistItem.href,
+        spotify: playlistItem.external_urls.spotify,
+      },
+      tracks: {
+        api: playlistItem.tracks.href,
+        total: playlistItem.tracks.total,
+      },
+    };
 
     return result;
   }
 
-  async getPlaylistTracks(playlist: PlaylistItem): Promise<Track[]> {
-    const api = playlist.tracks.href;
+  async getPlaylistTracks(playlist: SpotifyPlaylistResponse): Promise<Track[]> {
+    const api = playlist.tracks.api;
 
     const response = await axios.get(api, {
       params: {
@@ -66,10 +82,24 @@ export default class SpotifyAPI {
 
     const tracks: Track[] = [];
 
-    for (const r of response.data.items) {
-      const q = plainToClass(Track, r.track);
-      await validate(q, { whitelist: true });
-      tracks.push(q);
+    for (const item of response.data.items) {
+      const artists: Artist[] = [];
+
+      for (const a of item.track.artists) {
+        const artist = {
+          name: a.name,
+          url: a.external_urls.spotify,
+        };
+        artists.push(artist);
+      }
+
+      const track = {
+        name: item.track.name,
+        artists: artists,
+        url: item.track.external_urls.spotify,
+      };
+
+      tracks.push(track);
     }
 
     return tracks;

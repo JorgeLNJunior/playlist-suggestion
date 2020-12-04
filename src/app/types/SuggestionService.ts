@@ -1,4 +1,4 @@
-import { PlaylistItem, Track } from './Spotify';
+import { Track } from './Spotify';
 
 export type SuggestionServiceParams = {
   cityName?: any;
@@ -6,7 +6,15 @@ export type SuggestionServiceParams = {
   lon?: any;
 };
 
-export type PlaylistResult = {
-  playlist: PlaylistItem;
-  tracks: Track[];
+export type PlaylistResponse = {
+  temperature: number;
+  playlist: {
+    name: string;
+    description: string;
+    urls: {
+      api: string;
+      spotify: string;
+    };
+    tracks: Array<Track>;
+  };
 };

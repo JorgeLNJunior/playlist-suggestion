@@ -2,7 +2,7 @@ import SpotifyAPI from '../../api/spotify.api';
 import { WeatherAPI } from '../../api/weather.api';
 import { PlaylistGenre } from '../types/Spotify';
 import {
-  PlaylistResult,
+  PlaylistResponse,
   SuggestionServiceParams,
 } from '../types/SuggestionService';
 
@@ -19,7 +19,7 @@ export class SuggestionService {
   private readonly weatherApi: WeatherAPI = new WeatherAPI();
   private readonly spotifyApi: SpotifyAPI = new SpotifyAPI();
 
-  async getPlaylist(): Promise<PlaylistResult> {
+  async getPlaylist(): Promise<PlaylistResponse> {
     let temperature: number;
 
     if (this.cityName) {
@@ -45,9 +45,14 @@ export class SuggestionService {
     const playlist = await this.spotifyApi.searchPlaylist(genre);
     const tracks = await this.spotifyApi.getPlaylistTracks(playlist);
 
-    const result: PlaylistResult = {
-      playlist: playlist,
-      tracks: tracks,
+    const result: PlaylistResponse = {
+      temperature: temperature,
+      playlist: {
+        name: playlist.name,
+        description: playlist.description,
+        urls: playlist.urls,
+        tracks: tracks,
+      },
     };
 
     return result;

@@ -2,37 +2,26 @@ import { Allow } from 'class-validator';
 
 export type PlaylistGenre = 'party' | 'pop' | 'rock' | 'classical';
 
-export class PlaylistItem {
-  @Allow()
-  id: string;
-
-  @Allow()
+export type SpotifyPlaylistResponse = {
   name: string;
-
-  @Allow()
   description: string;
-
-  @Allow()
-  href: string;
-
-  @Allow()
-  external_urls: {
+  urls: {
+    api: string;
     spotify: string;
   };
-
-  @Allow()
   tracks: {
-    href: string;
+    api: string;
     total: number;
   };
-}
+};
 
-export class Track {
-  @Allow()
+export type Track = {
   name: string;
+  artists: Array<Artist>;
+  url: string;
+};
 
-  @Allow()
-  external_urls: {
-    spotify: string;
-  };
-}
+export type Artist = {
+  name: string;
+  url: string;
+};
