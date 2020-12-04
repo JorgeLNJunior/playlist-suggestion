@@ -37,7 +37,7 @@ export class SuggestionService {
       temperature >= 30
         ? 'party'
         : temperature >= 15 && temperature < 30
-        ? 'pop'
+        ? 'international pop'
         : temperature >= 10 && temperature <= 14
         ? 'rock'
         : 'classical';

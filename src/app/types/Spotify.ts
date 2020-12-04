@@ -1,4 +1,8 @@
-export type PlaylistGenre = 'party' | 'pop' | 'rock' | 'classical';
+export type PlaylistGenre =
+  | 'party'
+  | 'international pop'
+  | 'rock'
+  | 'classical';
 
 export type SpotifyPlaylistResponse = {
   name: string;
