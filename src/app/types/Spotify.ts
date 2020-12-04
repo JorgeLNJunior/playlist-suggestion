@@ -1,5 +1,3 @@
-import { Allow } from 'class-validator';
-
 export type PlaylistGenre = 'party' | 'pop' | 'rock' | 'classical';
 
 export type SpotifyPlaylistResponse = {

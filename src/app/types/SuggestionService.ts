@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Track } from './Spotify';
 
 export type SuggestionServiceParams = {
