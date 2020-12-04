@@ -6,6 +6,12 @@ export class SuggestionController {
   async suggest(req: Request, res: Response): Promise<Response> {
     const { cityName, lat, lon } = req.query;
 
+    if (!cityName && !(lat && lon)) {
+      return res
+        .status(400)
+        .json({ error: 'cityName or coordinates is required' });
+    }
+
     const suggestionService = new SuggestionService({
       cityName: cityName,
       lat: lat,

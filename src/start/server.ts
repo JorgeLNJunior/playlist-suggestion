@@ -6,7 +6,7 @@ import app from './app';
 const port = parseInt(process.env.PORT as string) || 3000;
 
 app.listen(port, async () => {
-  console.log(`listening on port ${port}`.green);
+  console.log(`listening at port ${port}`.green);
 
   try {
     await new SpotifyAPI().authenticate();
