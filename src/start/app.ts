@@ -5,7 +5,6 @@ import cors from 'cors';
 import express, { Request, Response } from 'express';
 import hateLimit from 'express-rate-limit';
 import helmet from 'helmet';
-import path from 'path';
 
 import { logger } from '../config/logger';
 import router from '../routes';
@@ -13,7 +12,6 @@ import router from '../routes';
 const app = express();
 
 app.use(express.json());
-app.use(express.static(path.resolve('public')));
 app.use(cors());
 app.use(helmet());
 app.use(logger);
