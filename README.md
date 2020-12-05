@@ -19,7 +19,7 @@ Aplicação que sugere playlist de acordo com a temperatura atual.
 
 <div align="center">
 
-[**API »**](https://github.com/JorgeLNJunior/playlist-suggestion)
+[**API »**](https://playlist-suggestion.herokuapp.com/)
 
 </div>
 
@@ -45,15 +45,17 @@ Informações básicas sobre as rotas da aplicação.
 
 ## Tecnologias
 Este projeto foi construído com as seguintes tecnologias:
-- [Node.js »](https://nodejs.org)
-- [Express.js »](https://expressjs.com)
-- [Typescript »](https://www.typescriptlang.org/)
-- [Jest »](https://jestjs.io)
-- [Travis CI »](https://travis-ci.org)
+- [**Node.js »**](https://nodejs.org)
+- [**Express.js »**](https://expressjs.com)
+- [**Typescript »**](https://www.typescriptlang.org/)
+- [**Jest »**](https://jestjs.io)
+- [**Travis CI »**](https://travis-ci.org)
+- [**Spotify API »**](https://developer.spotify.com/documentation/web-api/)
+- [**Open Weather API »**](https://openweathermap.org/api)
 
 ## Instalação e configuração
 ### Requisitos
-  - [Node.js »](https://nodejs.org/en/download) na sua versão 12.x
+  - [**Node.js »**](https://nodejs.org/en/download) na sua versão 12.x
   - Client ID e Client Secret da API do [**Spotify »**](https://developer.spotify.com/dashboard/applications)
   - Uma key da [**Open Weather API »**](https://openweathermap.org/api)
 
