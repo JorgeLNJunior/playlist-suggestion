@@ -4,6 +4,7 @@
   "description": "",
   "main": "dist/start/server.js",
   "scripts": {
+    "prepare": "husky install",
     "build": "rimraf ./dist && tsc",
     "start": "node .",
     "start:dev": "ts-node-dev --respawn --transpile-only --inspect -- ./src/start/server.ts",
@@ -42,6 +43,7 @@
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "husky": "^6.0.0",
     "jest": "^27.0.3",
+    "lint-staged": "^11.0.0",
     "prettier": "^2.3.0",
     "random-coordinates": "^1.0.1",
     "rimraf": "^3.0.2",
@@ -63,5 +65,8 @@
     "helmet": "^4.6.0",
     "node-schedule": "^2.0.0",
     "winston": "^3.3.3"
+  },
+  "lint-staged": {
+    "*.{js,ts}": "eslint --cache --fix"
   }
 }
